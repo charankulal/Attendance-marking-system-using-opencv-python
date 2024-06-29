@@ -8,12 +8,14 @@ cam = VideoCapture(cam_port)
 inp = input("Enter person name")
 # If image will detected without any error,
 # show result
-while 1:
+while True:
     result, image = cam.read()
     imshow(inp, image)
-    if cv2.waitKey(0):
+    cv2.putText(image, "Press 'q' to capture image", (50,50), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (255, 255, 255), 1)
+    if cv2.waitKey(1) & 0xFF == ord('q'):
         imwrite(inp + ".jpg", image)
         print("image taken")
+        break
 
 # If captured image is corrupted, moving to else part
 else:
